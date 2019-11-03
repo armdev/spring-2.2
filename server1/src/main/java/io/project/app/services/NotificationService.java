@@ -56,7 +56,7 @@ public class NotificationService {
         }
         
         if (!serverResponse.isSuccess()) {
-            log.error("Server1: Success sent data");
+            log.error("Server1: Not Success sent data");
         }
         
     }

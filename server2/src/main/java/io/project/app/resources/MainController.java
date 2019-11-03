@@ -1,6 +1,5 @@
 package io.project.app.resources;
 
-import io.project.app.api.responses.ApiResponseMessage;
 import io.project.app.domain.Notification;
 import io.project.app.services.NotificationService;
 
@@ -33,7 +32,8 @@ public class MainController {
     @CrossOrigin
     public ResponseEntity<?> start(@RequestBody Notification notification) {
         notificationService.continuePost(notification);
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseMessage("Received "));
+        log.info("Received request from server 1");
+        return ResponseEntity.status(HttpStatus.OK).body("Received");
     }
 
 }
