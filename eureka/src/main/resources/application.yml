@@ -1,0 +1,33 @@
+management:
+  security:  
+    enabled: true
+    
+spring:
+#  security:
+#      user:
+#        name: mpOwner
+#        password: mp19181975Secret
+#        roles: SYSTEM
+  application:
+    name: eureka
+
+server:
+  port: 8761
+
+eureka:
+  instance:  
+    leaseRenewalIntervalInSeconds: 10
+    prefer-ip-address: true
+    leaseExpirationDurationInSeconds: 3    
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    waitTimeInMsWhenSyncEmpty: 5  
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      #defaultZone: http://mpOwner:mp19181975Secret@eureka:8761/eureka, http://mpOwner:mp19181975Secret@eureka:8762/eureka
+      defaultZone: http://eureka:8761/eureka, http://eureka1:8762/eureka
+
+  

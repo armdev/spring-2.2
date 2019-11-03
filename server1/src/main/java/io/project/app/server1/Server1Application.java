@@ -1,0 +1,38 @@
+package io.project.app.server1;
+
+import brave.sampler.Sampler;
+import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.web.client.RestTemplate;
+
+@SpringBootApplication
+@EnableMongoRepositories("io.project.app.repositories")
+@ComponentScan(basePackages = {"io.project"})
+@EntityScan("io.project.app.domain")
+public class Server1Application {
+
+    public static void main(String[] args) {
+        final SpringApplication application = new SpringApplication(Server1Application.class);
+        application.setBannerMode(Banner.Mode.CONSOLE);
+        application.setWebApplicationType(WebApplicationType.REACTIVE);
+
+        application.run(args);
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @Bean
+    public Sampler sampler() {
+        return Sampler.ALWAYS_SAMPLE;
+    }
+
+}
