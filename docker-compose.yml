@@ -97,6 +97,35 @@ services:
     networks:
       - socnet
       
+      
+  server2:
+    image: server2  
+    build: ./server2
+    container_name: server2
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    links:      
+      - mongonode 
+      - eureka
+    depends_on:     
+      - mongonode
+      - eureka     
+    ports:
+      - '2021:2021'
+    volumes:
+      - /opt/server2/logs/:/opt/server2/logs
+    networks:
+      - socnet
+      
   
 
 networks:

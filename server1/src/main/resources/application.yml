@@ -19,8 +19,10 @@ management:
     
 server:
     port: 2020
-    
+
 spring:
+  main:
+   allow-bean-definition-overriding: true
   application:
     name: server1
     
