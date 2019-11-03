@@ -57,10 +57,10 @@ services:
     container_name: zipkin
     links:
       - eureka
-      - mysqlnode    
+     
     depends_on:     
       - eureka
-      - mysqlnode          
+          
     volumes:
       - /opt/zipkin/logs/:/opt/zipkin/logs     
     ports:

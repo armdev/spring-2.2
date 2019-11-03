@@ -8,21 +8,13 @@ spring:
   rabbitmq:
     port: 5672
     host: rabbitmq
-  datasource:
-    schema: classpath:/mysql.sql    
-    url: ${MYSQL_URI:jdbc:mysql://mysqlnode:3306/zipkin?autoReconnect=true} 
-   # driver-class-name: com.mysql.cj.jdbc.Driver
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: root
-    initialize: true
-    continue-on-error: true
+ 
   sleuth:
     enabled: false
 
 zipkin:
   storage:
-    type: mysql
+    type: mem
 
 logging:
   level:
@@ -42,7 +34,7 @@ eureka:
       enabled: true
     serviceUrl:
       #defaultZone: http://mpOwner:mp19181975Secret@eureka:8761/eureka, http://mpOwner:mp19181975Secret@eureka:8762/eureka
-      defaultZone: http://eureka:8761/eureka, http://eureka1:8762/eureka
+      defaultZone: http://eureka:8761/eureka
 
 
 #eureka:
