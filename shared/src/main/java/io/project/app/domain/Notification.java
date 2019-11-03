@@ -14,7 +14,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -33,7 +32,7 @@ public class Notification implements Serializable {
 
     @Id
     private String id;
-    @Indexed(unique = true)
+   
     private List<EventMessage> eventMessage = new ArrayList<>();
     
 
