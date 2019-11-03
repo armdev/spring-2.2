@@ -29,10 +29,10 @@ public class MainController {
     @Autowired
     private NotificationService notificationService;
 
-    @PostMapping(path = "/one", produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin   
+    @PostMapping(path = "/two", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
     public ResponseEntity<?> start(@RequestBody Notification notification) {
-notificationService.continuePost(notification);
+        notificationService.continuePost(notification);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseMessage("Received "));
     }
 
