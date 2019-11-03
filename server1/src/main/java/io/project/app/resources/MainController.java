@@ -28,9 +28,9 @@ public class MainController {
     private NotificationService notificationService;
 
     @GetMapping(path = "/one", produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin   
+    @CrossOrigin
     public ResponseEntity<?> start() {
-
+        notificationService.gen();
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseMessage("Flow started"));
     }
 
