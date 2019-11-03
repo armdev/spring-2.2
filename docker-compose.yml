@@ -34,37 +34,10 @@ services:
         aliases:
           - mongonode
     
-  mysqlnode:
-    image: mysqlnode  
-    build: ./mysqlnode
-    container_name: "mysqlnode"
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=root
-      - MYSQL_DATABASE=zipkin
-    volumes:
-      - /opt/mysqldata/logs/:/opt/mysql/logs 
-      - /opt/mysqldata/data:/var/lib/mysql    
-    ports:
-      - 3306:3306  
-    networks:
-     - socnet
+
      
        
-  phpmyadmin:
-   image: phpmyadmin/phpmyadmin  
-   container_name: "phpmyadmin"
-   links:
-    - mysqlnode
-   ports:
-     - 9191:80
-   environment:
-     MYSQL_USERNAME: root
-     MYSQL_ROOT_PASSWORD: root
-     PMA_HOST: mysql
-   networks:
-     - socnet
+
 
   eureka:
     image: eureka   
@@ -76,32 +49,7 @@ services:
       - /opt/eureka/logs/:/opt/eureka/logs
     networks:
       - socnet
-      
-  eureka1:
-    image: eureka1   
-    build: ./eureka1
-    container_name: eureka1   
-    ports:
-      - '8762:8762'
-    volumes:
-      - /opt/eureka1/logs/:/opt/eureka1/logs
-    networks:
-      - socnet
 
-  zuul:
-    image: zuul   
-    build: ./zuul
-    container_name: zuul
-    links:
-      - eureka
-    depends_on:     
-      - eureka   
-    volumes:
-      - /opt/zuul/logs/:/opt/zuul/logs     
-    ports:
-      - '8079:8079'
-    networks:
-      - socnet
       
   zipkin:
     image: zipkin   
@@ -121,10 +69,10 @@ services:
       - socnet
   
 
-  auth:
-    image: auth  
-    build: ./auth
-    container_name: auth
+  server1:
+    image: server1  
+    build: ./server1
+    container_name: server1
     restart: always
     logging:
       options:
@@ -143,95 +91,13 @@ services:
       - mongonode
       - eureka     
     ports:
-      - '5001:5001'
+      - '2020:2020'
     volumes:
-      - /opt/auth/logs/:/opt/auth/logs
+      - /opt/server1/logs/:/opt/server1/logs
     networks:
       - socnet
       
-  browser:
-    image: browser   
-    build: ./browser
-    container_name: browser
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-    links:     
-      - eureka
-    depends_on:      
-      - eureka     
-    ports:
-      - '5002:5002'
-    volumes:
-      - /opt/browser/logs/:/opt/browser/logs
-    networks:
-      - socnet
-      
-      
-  register:
-    image: register    
-    build: ./register
-    container_name: register
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-    links:      
-      - mongonode 
-      - eureka
-    depends_on:     
-      - mongonode
-      - eureka     
-    ports:
-      - '5003:5003'
-    volumes:
-      - /opt/register/logs/:/opt/register/logs
-    networks:
-      - socnet
-      
-      
-  wiki:
-    image: wiki    
-    build: ./wiki
-    container_name: wiki
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-    links:      
-      - mongonode 
-      - eureka
-    depends_on:     
-      - mongonode
-      - eureka     
-    ports:
-      - '5004:5004'
-    volumes:
-      - /opt/wiki/logs/:/opt/wiki/logs
-    networks:
-      - socnet   
+  
 
 networks:
   socnet:

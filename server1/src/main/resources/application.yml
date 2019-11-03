@@ -18,16 +18,19 @@ management:
       enabled-by-default: 'false'
     
 server:
-    port: 5002
+    port: 2020
     
 spring:
   application:
-    name: browser
+    name: server1
     
-    
+  data:
+    mongodb:       
+       uri: mongodb://BingoBongo:Abcdf@mongonode:27017/dataDB?ssl=false&connectTimeoutMS=300000&minPoolSize=0&maxPoolSize=100&maxIdleTimeMS=900000&authSource=admin  
+       
   cloud:
     discovery:
-       service-id: browser
+       service-id: server1
        enabled: true
       
   zipkin:
@@ -40,13 +43,6 @@ spring:
     sampler:
     percentage: 1 
 
-     
-
-jwt:
-    header: Authorization
-    expires_in: 300 
-    mobile_expires_in: 400   
-    secret: supersecret2019
     
 eureka:
   instance:  
@@ -59,5 +55,5 @@ eureka:
     healthcheck:
       enabled: true
     serviceUrl:
-      defaultZone: http://eureka:8761/eureka, http://eureka1:8762/eureka
+      defaultZone: http://eureka:8761/eureka
 
