@@ -7,9 +7,10 @@
     <packaging>pom</packaging>
     <modules>        
         <module>eureka</module>
-     <module>zipkin</module>
+        <module>zipkin</module>
         <module>shared</module>
         <module>server1</module>
+        <module>server2</module>
         	
          
     </modules>
