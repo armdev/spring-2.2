@@ -7,6 +7,7 @@ package io.project.app.services;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
+import io.project.app.api.responses.ApiResponseMessage;
 import io.project.app.domain.EventMessage;
 import io.project.app.domain.Notification;
 import io.project.app.repositories.NotificationRepository;
@@ -50,36 +51,28 @@ public class NotificationService {
         
         final String url = this.nextServer() + "api/v2/server2/two";
 
-        Try<ResponseEntity<?>> serverResponse = Try.of(() -> restTemplate.postForObject(url, request, ResponseEntity.class));
-        
-//        
-//        if( serverResponse.get().hasBody()){
-//            log.info("Status code " + serverResponse.get().getStatusCode());
-//            
-//        }
-        
-        //log.info("Status Body " +   serverResponse.get().getBody().toString());
+        Try<ApiResponseMessage> serverResponse = Try.of(() -> restTemplate.postForObject(url, request, ApiResponseMessage.class));
+
         if (serverResponse.isSuccess()) {
             log.info("Server1: isSuccess");
-            log.info("Status code " + serverResponse.get().getStatusCode());
+            log.info("Status code ");
 
         }
 
         if (serverResponse.isAsync()) {
             log.error("Server1: isAsync");
-             log.error("Status code " + serverResponse.get().getStatusCode());
+             
 
         }
 
         if (serverResponse.isEmpty()) {
             log.error("Server1: isEmpty");
-            log.error("Status code " + serverResponse.get().getStatusCode());
+            
 
         }
 
         if (serverResponse.isFailure()) {
-            log.error("Server1: isFailure");
-            log.error("Status code " + serverResponse.get().getStatusCode());
+            log.error("Server1: isFailure");            
         }
 
     }
