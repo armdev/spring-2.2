@@ -7,20 +7,21 @@ import static springfox.documentation.builders.PathSelectors.regex;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 
 /**
  *
  * @author armdev
  */
 @Configuration
-@EnableSwagger2WebFlux
-public class SwaggerConfig {
+@EnableSwagger2
+class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("From Zero To Hero")
-                .description("Test application")
+                .title("LoadAPI: Warning: Architect will ping you if you crash this API")
+                .description("Axele Load: From Java Zero to Java One just one flight")
                 .termsOfServiceUrl("http://www-03.ibm.com/software/sla/sladb.nsf/sla/bm?Open")
                 .contact("Armen Arzumanyan")
                 .license("Apache License Version 2.0")
@@ -32,11 +33,12 @@ public class SwaggerConfig {
     @Bean
     public Docket personApi() {
         return new Docket(DocumentationType.SWAGGER_2).enable(true)
-                .groupName("Super API")
+                .groupName("load")
                 .apiInfo(apiInfo())
                 .select()
                 .paths(regex("/api.*"))
                 .build();
     }
+
 
 }

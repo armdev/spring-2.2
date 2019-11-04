@@ -25,10 +25,9 @@ public class MainController {
     private NotificationService notificationService;
 
     @GetMapping(path = "/one", produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin
-   
+    @CrossOrigin   
     public String start() {
-        notificationService.gen();
+       notificationService.gen();
         return ("Flow started");
     }
 

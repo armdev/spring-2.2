@@ -30,14 +30,14 @@ public class NotificationService {
 
     @Autowired
     private NotificationRepository notificationRepository;
-    
+
     @Autowired
     private EurekaClient discoveryClient;
-    
+
     @Autowired
     private RestTemplate restTemplate;
 
-    public void continuePost(Notification notification) {
+    public Optional<Notification> continuePost(Notification notification) {
         Optional<Notification> savedEvent = notificationRepository.findById(notification.getId());
         if (savedEvent.isPresent()) {
             log.info("Found stored object");
@@ -45,8 +45,11 @@ public class NotificationService {
             eventMessage.setServerName("server2");
             eventMessage.setTimestamp(new Date(System.currentTimeMillis()).getTime());
             savedEvent.get().getEventMessage().add(eventMessage);
-            notificationRepository.save(savedEvent.get());
+            Notification savedRecord = notificationRepository.save(savedEvent.get());
+            return Optional.ofNullable(savedRecord);
         }
+
+        return Optional.empty();
 
         //this.postDate(savedEvent.get());
     }

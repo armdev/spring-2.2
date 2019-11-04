@@ -5,6 +5,7 @@
  */
 package io.project.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode
 @ToString
 @Document(collection = "notification")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Notification implements Serializable {
 
     private static final long serialVersionUID = 5457306871064654513L;

@@ -1,5 +1,6 @@
 package io.project.app.api.responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.project.app.domain.Notification;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountResponseMessage implements Serializable {
 
     private static final long serialVersionUID = 1L;

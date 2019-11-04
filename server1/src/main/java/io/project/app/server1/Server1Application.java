@@ -28,7 +28,7 @@ public class Server1Application {
     public static void main(String[] args) {
         final SpringApplication application = new SpringApplication(Server1Application.class);
         application.setBannerMode(Banner.Mode.CONSOLE);
-        application.setWebApplicationType(WebApplicationType.REACTIVE);
+        application.setWebApplicationType(WebApplicationType.SERVLET);
 
         application.run(args);
     }
